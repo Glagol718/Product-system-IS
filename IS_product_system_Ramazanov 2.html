@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terraria Crafting System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /*width: 80%;*/
+            /*max-width: 600px;*/
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .controls {
+            margin-top: 20px;
+        }
+        .controls input, .controls select {
+            margin: 5px;
+        }
+        .output {
+            margin-top: 20px;
+            width: 100%;
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        #facts-selection {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        .column {
+            flex: 1;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Terraria Crafting System</h1>
+        <div class="controls">
+            <label>Select Item: <select id="item-select">
+                <option value="torch">Torch</option>
+                <option value="campfire">Campfire</option>
+                <option value="ice_torch">Ice Torch</option>
+                <option value="wooden_arrow">Wooden Arrow</option>
+                <option value="frostburn_arrow">Frostburn Arrow</option>
+                <option value="flaming_arrow">Flaming Arrow</option>
+                <option value="sticky_glowstick">Sticky Glowstick</option>
+                <option value="jester_arrow">Jester's Arrow</option>
+                <option value="furnace"> Furnace</option>
+                <option value="iron_bar">Iron Bar</option>
+                <option value="iron_anvil">Iron Anvil</option>
+                <option value="iron_chain">Iron Chain</option>
+                <option value="sawmill">Sawmill</option>
+                <option value="loom">Loom</option>
+                <option value="cauldron">Cauldron</option>
+                <option value="silk">Silk</option>
+                <option value="bed">Bed</option>
+                <option value="chest">Chest</option>
+                <option value="wooden_table">Wooden Table</option>
+                <option value="wooden_chair">Wooden Chair</option>
+                <option value="keg">Keg</option>
+                <option value="heavy_work_bench">Heavy Work Bench</option>
+                <option value="empty_bucket">Empty Bucket</option>
+                <option value="lava_bucket">Lava Bucket</option>
+                <option value="water_bucket">Water Bucket</option>
+                <option value="sink">Sink</option>
+                <option value="teapot">Teapot</option>
+                <option value="glass_kiln">Glass Kiln</option>
+                <option value="gray_brick">Gray Brick</option>
+                <option value="glass">Glass</option>
+                <option value="copper_bar">Copper Bar</option>
+                <option value="silver_bar">Silver Bar</option>
+                <option value="gold_bar">Gold Bar</option>
+                <option value="wood_platform">Wood Platform</option>
+                <option value="wooden_door">Wooden Door</option>
+                <option value="piano">Piano</option>
+                <option value="bookcase">Bookcase</option>
+                <option value="grandfathers_clock">Grandfather's Clock</option>
+                <option value="trapdoor">Trapdoor</option>
+                <option value="tall_gate">Tall Gate</option>
+                <option value="throne">Throne</option>
+                <option value="target_dummy">Target Dummy</option>
+                <option value="banner">Banner</option>
+                <option value="bottle">Bottle</option>
+                <option value="bowl">Bowl</option>
+                <option value="bouncy_glowstick">Bouncy Glowstick</option>
+                <option value="candle">Candle</option>
+                <option value="copper_chandelier"> Copper Chandelier</option>
+                <option value="glass_lantern">Glass Lantern</option>
+                <option value="fireplace">Fireplace</option>
+                <option value="chinese_lantern">Chinese Lantern</option>
+                <option value="jack_o_lantern">Jack'O'Lantern</option>
+                <option value="sign">Sign</option>
+                <option value="minecart">Minecart</option>
+                <option value="minecart_track">Minecart Track</option>
+                <option value="copper_coin">Copper Coin</option>
+                <option value="silver_coin">Silver Coin</option>
+                <option value="gold_coin">Gold Coin</option>
+                <option value="mana_crystal">Mana Crystal</option>
+                <option value="cactus_pickaxe">Cactus Pickaxe</option>
+                <option value="copper_pickaxe">Copper Pickaxe</option>
+                <option value="iron_pickaxe">Iron Pickaxe</option>
+                <option value="silver_pickaxe">Silver Pickaxe</option>
+                <option value="gold_pickaxe">Gold Pickaxe</option>
+                <option value="wooden_yoyo">Wooden_Yoyo</option>
+                <option value="wooden_bow">Wooden Bow</option>
+                <option value="copper_bow">Copper Bow</option>
+                <option value="iron_bow">Iron Bow</option>
+                <option value="silver_bow">Silver Bow</option>
+                <option value="gold_bow">Gold Bow</option>
+                <option value="unholy_arrow">Unholy Arrow</option>
+                <option value="sticky_bomb">Sticky Bomb</option>
+                <option value="bouncy_bomb">Bouncy Bomb</option>
+                <option value="sticky_grenade">Sticky Grenade</option>
+                <option value="bouncy_grenade">Bouncy Grenade</option>
+                <option value="dirt_bomb">Dirt Bomb</option>
+                <option value="mug">Mug</option>
+                <option value="ale">Ale</option>
+                <option value="molotov_cocktail">Molotov Cocktail</option>
+                <option value="goggles">Goggles</option>
+                <option value="sunglasses">Sunglasses</option>
+                <option value="copper_watch">Copper Watch</option>
+                <option value="white_string">White String</option>
+                <option value="tinkerers_workshop">Tinkerer's Workshop</option>
+                <option value="crystal_ball">Crystall Ball</option>
+                <option value="wire">Wire</option>
+                <option value="red_wrench">Red Wrench</option>
+                <option value="wire_cutter">Wire Cutter</option>
+                <option value="multicolor_wrench">Multicolor Wrench</option>
+                <option value="actuator">Actuator</option>
+                <option value="activation_rod">Activation Rod</option>
+                <option value="five_second_timer">5 second timer</option>
+                <option value="chest_trap">Chest Trap</option>
+                <option value="dynamite">Dynamite</option>
+                <option value="active_stone_block">Active Stone Block</option>
+                <option value="explosives">Explosives</option>
+                <option value="announcement_box">Announcement Box</option>
+                <option value="shuriken">Shuriken</option>
+                <option value="throwing_knife">Throwing Knife</option>
+                <option value="bottled_water">Bottled Water</option>
+                <option value="holy_hand_grenade">Holy Hand Grenade</option>
+                <option value="musket_ball">Musket Ball</option>
+                <option value="endless_musket_pouch">Endless Musket Pouch</option>
+                <option value="silver_bullet">Silver Bullet</option>
+                <option value="clay_pot">Clay Pot</option>
+                <option value="terrarium">Terrarium</option>
+                <option value="chandelabra">Chandelabra</option>
+                <option value="water_candle">Water Candle</option>
+                <option value="tiki_torch">Tiki torch</option>
+                <option value="star_in_bottle">Star in a bottle</option>
+                <option value="teacup">Teacup</option>
+                <option value="wooden_sword">Wooden Sword</option>
+                <option value="cactus_sword">Cactus Sword</option>
+                <option value="copper_sword">Copper Sword</option>
+                <option value="iron_sword">Iron Sword</option>
+                <option value="silver_sword">Silver Sword</option>
+                <option value="gold_sword">Gold Sword</option>
+                <option value="sofa">Sofa</option>
+                <option value="dresser">Dresser</option>
+            </select></label>
+            <br>
+            <div id="facts-selection">
+                <!-- Columns for checkboxes -->
+                <div class="column"></div>
+                <div class="column"></div>
+                <div class="column"></div>
+                <div class="column"></div>
+                <div class="column"></div>
+            </div>
+            <br>
+            <button onclick="forwardChaining()">Forward Chaining</button>
+            <button onclick="backwardChaining()">Backward Chaining</button>
+        </div>
+        <div class="output" id="output"></div>
+    </div>
+
+    <script>
+        const facts = [
+            "wood", "work_bench", "gel", "torch", "campfire", "ice_block", "ice_torch", "stone_block", "wooden_arrow", "frostburn_arrow", 
+            "flaming_arrow", "glowstick", "sticky_glowstick", "fallen_star", "jester_arrow", "furnace", "iron_anvil", "iron_ore", 
+            "iron_bar", "sawmill", "iron_chain", "loom", "cauldron", "cobweb", "silk", "bed", "chest", "wooden_table", "wooden_chair",
+            "keg", "heavy_work_bench", "empty_bucket", "water", "lava", "lava_bucket", "water_bucket", "sink", "clay_block", "bones",
+            "teapot", "glass_kiln", "gray_brick", "sand_block", "glass", "copper_ore", "copper_bar", "silver_ore", "silver_bar",
+            "gold_ore", "gold_bar", "wood_platform", "wooden_door", "book", "piano", "bookcase", "grandfathers_clock", "trapdoor",
+            "tall_gate", "throne", "hay", "target_dummy", "banner", "bottle", "bowl", "pink_gel", "bouncy_glowstick", "candle",
+            "copper_chandelier", "glass_lantern", "fireplace", "chinese_lantern", "pumpkin", "jack_o_lantern", "sign", "minecart",
+            "minecart_track", "copper_coin", "silver_coin", "gold_coin", "mana_crystal", "cactus", "cactus_pickaxe", "copper_pickaxe",
+            "iron_pickaxe", "silver_pickaxe", "gold_pickaxe", "wooden_yoyo", "wooden_bow", "copper_bow", "iron_bow", "silver_bow", "gold_bow",
+            "worm_tooth", "unholy_arrow", "bomb", "sticky_bomb", "bouncy_bomb", "grenade", "sticky_grenade", "bouncy_grenade", "dirt_block",
+            "dirt_bomb", "mug", "ale", "molotov_cocktail", "lens", "goggles", "black_lens", "sunglasses", "copper_watch", "white_string",
+            "tinkerers_workshop", "crystal_ball", "wire", "red_wrench", "wire_cutter", "multicolor_wrench", "actuator", "activation_rod",
+            "five_second_timer", "chest_trap", "dynamite", "active_stone_block", "explosives", "announcement_box", "shuriken", "throwing_knife",
+            "bottled_water", "holy_hand_grenade", "musket_ball", "endless_musket_pouch", "silver_bullet", "clay_pot", "terrarium",
+            "chandelabra", "water_candle", "tiki_torch", "star_in_bottle", "teacup", "wooden_sword", "cactus_sword", "copper_sword",
+            "iron_sword", "silver_sword", "gold_sword", "sofa", "dresser"
+        ];
+
+        const rules = [
+            { inputs: ["wood", "gel"], output: "torch" },
+            { inputs: ["wood", "torch"], output: "campfire" },
+            { inputs: ["ice_block", "torch"], output: "ice_torch" },
+            { inputs: ["wood", "stone_block"], output: "work_bench" },
+            { inputs: ["wood", "work_bench"], output: "wooden_arrow" },
+            { inputs: ["wooden_arrow", "ice_block"], output: "frostburn_arrow" },
+            { inputs: ["wooden_arrow", "torch"], output: "flaming_arrow" },
+            { inputs: ["glowstick", "gel"], output: "sticky_glowstick" },
+            { inputs: ["fallen_star", "wooden_arrow"], output: "jester_arrow" },
+            { inputs: ["work_bench", "stone_block", "wood"], output: "furnace"},
+            { inputs: ["work_bench", "iron_bar"], output: "iron_anvil"},
+            { inputs: ["iron_anvil", "iron_bar"], output: "iron_chain"},
+            { inputs: ["iron_chain", "iron_bar", "wood", "work_bench"], output: "sawmill"},
+            { inputs: ["sawmill", "wood"], output: "loom"},
+            { inputs: ["wood", "iron_bar", "iron_anvil"], output: "cauldron"},
+            { inputs: ["iron_ore", "furnace"], output: "iron_bar"},
+            { inputs: ["loom", "cobweb"], output: "silk"},
+            { inputs: ["sawmill", "wood", "silk"], output: "bed"},
+            { inputs: ["wood", "iron_bar", "work_bench"], output: "chest"},
+            { inputs: ["wood"], output: "wooden_table"},
+            { inputs: ["wood"], output: "wooden_chair"},
+            { inputs: ["sawmill", "wood"], output: "keg"},
+            { inputs: ["iron_anvil", "iron_bar", "wood"], output: "heavy_work_bench"},
+            { inputs: ["iron_anvil", "iron_bar"], output: "empty_bucket"},
+            { inputs: ["water", "empty_bucket"], output: "water_bucket"},
+            { inputs: ["lava", "empty_bucket"], output: "lava_bucket"},
+            { inputs: ["work_bench", "wood", "water_bucket"], output: "sink"},
+            { inputs: ["furnace", "clay_block", "bones"], output: "teapot"},
+            { inputs: ["iron_anvil", "iron_bar", "torch"], output: "glass_kiln"},
+            { inputs: ["furnace", "stone_block"], output: "gray_brick"},
+            { inputs: ["sand_block", "furnace"], output: "glass"},
+            { inputs: ["copper_ore", "furnace"], output: "copper_bar"},
+            { inputs: ["silver_ore", "furnace"], output: "silver_bar"},
+            { inputs: ["gold_ore", "furnace"], output: "gold_bar"},
+            { inputs: ["wood"], output: "wood_platform"},
+            { inputs: ["work_bench", "wood"], output: "wooden_door"},
+            { inputs: ["book", "wood", "bones", "sawmill"], output: "piano"},
+            { inputs: ["book", "sawmill", "wood"], output: "bookcase"},
+            { inputs: ["gold_bar", "iron_anvil", "glass", "wood"], output: "grandfathers_clock"},
+            { inputs: ["iron_bar", "wood", "work_bench"], output: "trapdoor"},
+            { inputs: ["heavy_work_bench", "wood", "iron_bar"], output: "tall_gate"},
+            { inputs: ["iron_anvil", "gold_bar", "silk"], output: "throne"},
+            { inputs: ["hay", "wood", "sawmill"], output: "target_dummy"},
+            { inputs: ["loom", "silk"], output: "banner"},
+            { inputs: ["furnace", "glass"], output: "bottle"},
+            { inputs: ["furnace", "clay_block"], output: "bowl"},
+            { inputs: ["pink_gel", "glowstick"], output: "bouncy_glowstick"},
+            { inputs: ["work_bench", "torch", "gold_bar"], output: "candle"},
+            { inputs: ["furnace", "torch", "copper_bar", "iron_chain"], output: "copper_chandelier"},
+            { inputs: ["work_bench", "torch", "glass"], output: "glass_lantern"},
+            { inputs: ["work_bench", "torch", "wood", "gray_brick"], output: "fireplace"},
+            { inputs: ["work_bench", "torch", "silk"], output: "chinese_lantern"},
+            { inputs: ["work_bench", "torch", "pumpkin"], output: "jack_o_lantern"},
+            { inputs: ["work_bench", "wood"], output: "sign"},
+            { inputs: ["iron_bar", "wood"], output: "minecart"},
+            { inputs: ["iron_anvil", "iron_bar", "wood"], output: "minecart_track"},
+            { inputs: ["copper_coin"], output: "silver_coin"},
+            { inputs: ["silver_coin"], output: "gold_coin"},
+            { inputs: ["gold_coin"], output: "silver_coin"},
+            { inputs: ["silver_coin"], output: "copper_coin"},
+            { inputs: ["fallen_star"], output: "mana_crystal"},
+            { inputs: ["cactus", "work_bench"], output: "cactus_pickaxe"},
+            { inputs: ["iron_anvil", "copper_bar", "wood"], output: "copper_pickaxe"},
+            { inputs: ["iron_anvil", "iron_bar", "wood"], output: "iron_pickaxe"},
+            { inputs: ["iron_anvil", "silver_bar", "wood"], output: "silver_pickaxe"},
+            { inputs: ["iron_anvil", "gold_bar", "wood"], output: "gold_pickaxe"},
+            { inputs: ["work_bench", "wood", "cobweb"], output: "wooden_yoyo"},
+            { inputs: ["work_bench", "wood"], output: "wooden_bow"},
+            { inputs: ["iron_anvil", "copper_bar"], output: "copper_bow"},
+            { inputs: ["iron_anvil", "iron_bar"], output: "iron_bow"},
+            { inputs: ["iron_anvil", "silver_bar"], output: "silver_bow"},
+            { inputs: ["iron_anvil", "gold_bar"], output: "gold_bow"},
+            { inputs: ["worm_tooth", "wooden_arrow"], output: "unholy_arrow"},
+            { inputs: ["bomb", "gel"], output: "sticky_bomb"},
+            { inputs: ["bomb", "pink_gel"], output: "bouncy_bomb"},
+            { inputs: ["grenade", "gel"], output: "sticky_grenade"},
+            { inputs: ["grenade", "pink_gel"], output: "bouncy_grenade"},
+            { inputs: ["dirt_block", "bomb"], output: "dirt_bomb"},
+            { inputs: ["furnace", "glass"], output: "mug"},
+            { inputs: ["keg", "mug"], output: "ale"},
+            { inputs: ["silk", "ale", "torch", "pink_gel"], output: "molotov_cocktail"},
+            { inputs: ["lens", "work_bench"], output: "goggles"},
+            { inputs: ["black_lens", "work_bench"], output: "sunglasses"},
+            { inputs: ["copper_bar", "work_bench", "iron_chain"], output: "copper_watch"},
+            { inputs: ["loom", "cobweb"], output: "white_string"},
+            { inputs: ["gold_coin"], output: "tinkerers_workshop"},
+            { inputs: ["gold_coin"], output: "crystal_ball"},
+            { inputs: ["silver_coin"], output: "wire"},
+            { inputs: ["gold_coin"], output: "red_wrench"},
+            { inputs: ["gold_coin"], output: "wire_cutter"},
+            { inputs: ["red_wrench", "wire_cutter", "tinkerers_workshop"], output: "multicolor_wrench"},
+            { inputs: ["silver_coin"], output: "actuator"},
+            { inputs: ["iron_anvil", "iron_bar", "wire", "actuator"], output: "activation_rod"},
+            { inputs: ["copper_watch", "wire", "iron_anvil"], output: "five_second_timer"},
+            { inputs: ["heavy_work_bench", "chest", "wire"], output: "chest_trap"},
+            { inputs: ["silver_coin"], output: "dynamite"},
+            { inputs: ["wire", "stone_block"], output: "active_stone_block"},
+            { inputs: ["dynamite", "wire"], output: "explosives"},
+            { inputs: ["sign", "wire", "iron_anvil", "iron_bar"], output: "announcement_box"},
+            { inputs: ["copper_coin"], output: "shuriken"},
+            { inputs: ["copper_coin"], output: "throwing_knife"},
+            { inputs: ["sink", "bottle"], output: "bottled_water"},
+            { inputs: ["bottled_water", "gold_bar", "dynamite", "work_bench"], output: "holy_hand_grenade"},
+            { inputs: ["copper_coin"], output: "musket_ball"},
+            { inputs: ["crystal_ball", "musket_ball"], output: "endless_musket_pouch"},
+            { inputs: ["musket_ball", "iron_anvil", "silver_bar"], output: "silver_bullet"},
+            { inputs: ["furnace", "clay_block"], output: "clay_pot"},
+            { inputs: ["furnace", "glass"], output: "terrarium"},
+            { inputs: ["work_bench", "torch", "gold_bar"], output: "chandelabra"},
+            { inputs: ["candle", "water", "crystal_ball"], output: "water_candle"},
+            { inputs: ["wood", "torch", "work_bench"], output: "tiki_torch"},
+            { inputs: ["fallen_star", "bottle"], output: "star_in_bottle"},
+            { inputs: ["teapot", "bottled_water"], output: "teacup"},
+            { inputs: ["wood", "work_bench"], output: "wooden_sword"},
+            { inputs: ["cactus", "work_bench"], output: "cactus_sword"},
+            { inputs: ["iron_anvil", "copper_bar"], output: "copper_sword"},
+            { inputs: ["iron_anvil", "iron_bar"], output: "iron_sword"},
+            { inputs: ["iron_anvil", "silver_bar"], output: "silver_sword"},
+            { inputs: ["iron_anvil", "gold_bar"], output: "gold_sword"},
+            { inputs: ["sawmill", "silk", "wood"], output: "sofa"},
+            { inputs: ["sawmill", "wood"], output: "dresser"},
+            { inputs: ["silk"], output: "wood"}
+        ];
+
+        const factsSelection = document.getElementById('facts-selection');
+        const columns = document.querySelectorAll('.column');
+
+        facts.forEach((fact, index) => {
+            const checkbox = document.createElement('input');
+            checkbox.type = 'checkbox';
+            checkbox.value = fact;
+            checkbox.id = fact;
+            const label = document.createElement('label');
+            label.htmlFor = fact;
+            label.appendChild(document.createTextNode(fact));
+            columns[index % 5].appendChild(checkbox);
+            columns[index % 5].appendChild(label);
+            columns[index % 5].appendChild(document.createElement('br'));
+        });
+
+        function getSelectedFacts() {
+            const selectedFacts = new Set();
+            const checkboxes = document.querySelectorAll('#facts-selection input[type="checkbox"]:checked');
+            checkboxes.forEach(checkbox => selectedFacts.add(checkbox.value));
+            return selectedFacts;
+        }
+
+        function forwardChaining() {
+            const selectedItem = document.getElementById('item-select').value;
+            const output = document.getElementById('output');
+            output.innerHTML = "";
+
+            const initialFacts = getSelectedFacts();
+            let currentFacts = new Set(initialFacts);
+            let newFacts = new Set();
+            let appliedRules = new Set();
+
+            while (true) {
+                let applied = false;
+
+                for (const rule of rules) {
+                    if (appliedRules.has(rule)) continue;
+
+                    const allInputsKnown = rule.inputs.every(input => currentFacts.has(input));
+                    if (allInputsKnown) {
+                        appliedRules.add(rule);
+                        newFacts.add(rule.output);
+                        output.innerHTML += `Applied rule: ${rule.inputs.join(', ')} -> ${rule.output}<br>`;
+                        applied = true;
+
+                        if (rule.output === selectedItem) {
+                            output.innerHTML += `Successfully derived ${selectedItem} using forward chaining.`;
+                            return;
+                        }
+                    }
+                }
+
+                if (!applied) break;
+
+                newFacts.forEach(fact => currentFacts.add(fact));
+                newFacts.clear();
+            }
+
+            output.innerHTML += `Failed to derive ${selectedItem} using forward chaining.`;
+        }
+
+        function backwardChaining() {
+            const selectedItem = document.getElementById('item-select').value;
+            const output = document.getElementById('output');
+            output.innerHTML = "";
+
+            const initialFacts = getSelectedFacts();
+            const appliedRules = [];
+            const visitedfacts = new Set();
+            let newfacts = new Set();
+
+            function findPath(goal) {
+                if (initialFacts.has(goal)) {
+                    return true;
+                }
+
+                if (newfacts.has(goal))
+                {
+                    return true;
+                }
+
+                if (visitedfacts.has(goal))
+                {
+                    return false;
+                }
+
+                visitedfacts.add(goal)
+
+                for (const rule of rules) {
+                    if (rule.output === goal) {
+                        let allInputsKnown = true;
+                        for (const input of rule.inputs) {
+                            if (!findPath(input)) {
+                                allInputsKnown = false;
+                                break;
+                            }
+                        }
+                        if (allInputsKnown) {
+                            appliedRules.push(rule);
+                            newfacts.add(goal);
+                            return true;
+                        }
+                    }
+                }
+                return false;
+            }
+
+            if (findPath(selectedItem)) {
+                appliedRules.reverse().forEach(rule => {
+                    output.innerHTML += `Applied rule: ${rule.inputs.join(', ')} -> ${rule.output}<br>`;
+                });
+                output.innerHTML += `Successfully derived ${selectedItem} using backward chaining.`;
+            } else {
+                output.innerHTML += `Failed to derive ${selectedItem} using backward chaining.`;
+            }
+        }
+    </script>
+</body>
+</html>
